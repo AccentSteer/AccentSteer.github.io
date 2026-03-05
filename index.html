@@ -1,10 +1,319 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Demo/title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Table</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px; /* Adds spacing around the content */
+        }
+        .container {
+            margin: 0 auto; /* Centers the content */
+            max-width: 90%; /* Limits the width of the page */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* First table (speechocean762): narrow text columns, audio columns take the rest */
+        table.samples-table {
+            table-layout: fixed;
+        }
+        table.samples-table th:nth-child(1),
+        table.samples-table th:nth-child(2),
+        table.samples-table td:nth-child(1),
+        table.samples-table td:nth-child(2) {
+            width: 12%;
+            max-width: 12%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        table.samples-table th:nth-child(3),
+        table.samples-table th:nth-child(4),
+        table.samples-table th:nth-child(5),
+        table.samples-table td.audio-cell {
+            width: 25.33%; /* Remaining space shared by 3 audio columns */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td.audio-cell {
+            width: 12%; /* Default for other tables */
+        }
+        td.audio-cell audio {
+            width: 100%; /* Makes audio player fill the cell */
+        }
+        .title {
+        background-color: rgb(0,80,0);
+        width: 100%;
+        text-align: center
+      }
+
+      .title td{
+        padding: 5px;
+      }
+
+      .title .logo{
+        width: 220px;
+      }
+
+      .title h1{
+        font-size: 18pt;
+        font-family: avant garde, verdana, helvetica, sans-serif;
+        color: white;
+        line-height: 1.15;
+      }
+
+      .title h2{
+        font-size: 12pt;
+        font-family: georgia, times new roman, serif;
+        font-style: italic;
+        color: white;
+        line-height: 1.15;
+      }
+    </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>Audio Demo</p>
+    <table class="title">
+        <tbody>
+        <tr>
+        <td>
+        <h1>Activation Steering for Accent-Neutralized Zero-Shot Text-To-Speech</h1>
+        <h2>Anonymous submission to Interspeech 2026</h2>
+        </td>
+        </tbody>
+    </table>
+    <div class="container">
+        <h1>Activation Steering for Accent-Neutralized Zero-Shot Text-To-Speech</h1>
+        <p>Audio samples for the paper "Activation Steering for Accent-Neutralized Zero-Shot Text-To-Speech".</p>
+        <p>We introduce a simple yet effective activation steering method for accent-neutralized zero-shot TTS. 
+          The generated speech is expected to have the same timbre as the reference speech, but with neutralized accents (US American accent is considered as the neutral accent).
+          Experiments are conducted on Qwen3-TTS.
+          We extract the steering vectors using the samples from L2-ARCTIC, and applied to both L2-ARCTIC and speechocean762 for evaluation. </p>
+        <p>Below we showcase the generated speech samples with and without activation steering. 
+            We show the TTS target text (<b>Target Text</b>), the reference speech (<b>Reference Speech</b>), the transcription of the reference speech (<b>Reference Text</b>), 
+            the generated speech without activation steering (<b>Unsteered</b>) and the generated speech with activation steering (<b>Steered</b>), which is our proposed method.
+        </p>
+        <p>We show audio samples on two evaluation sets: L2-ARCTIC (in-domain evaluation) and speechocean762 (out-of-domain evaluation).</p>
+        <hr>
+        <h1>speechocean762 samples (out-of-domain evaluation)</h1>
+        <table class="samples-table">
+            <thead>
+                <tr>
+                    <th>Target Text</th>
+                    <th>Reference Text</th>
+                    <th>Reference Speech</th>
+                    <th>Unsteered (Qwen3-TTS Baseline)</th>
+                    <th>Steered (Proposed)</th>
+                </tr>
+            </thead>
+                <tr>
+                    <td>FIVE SEVEN ONE THREE</td>
+                    <td>NOW IS THE NEW LATER</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/011350158.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000920040_1135.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000920040_SPEAKER1135.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>DOOR HAS ARE BEAUTIFUL SHIRTS</td>
+                    <td>IT WAS ONLY A NOTE A FEW LINES</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/011350318.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000920099_1135.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000920099_SPEAKER1135.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>ONE FIVE NINE NINE</td>
+                    <td>NOT SORRY FOR THE LANGUAGE</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/003060229.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000440032_0306.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000440032_SPEAKER0306.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>LOOK AT THE BIG FOOT</td>
+                    <td>THIS LOOKS AS IF IT'S GOING TO WORK</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/011560063.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000490086_1156.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000490086_SPEAKER1156.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>MARK IS GOING TO SEE ELEPHANT</td>
+                    <td>I WAS AT THE CONCERT</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/010390216.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000030012_1039.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000030012_SPEAKER1039.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>IT WAS A PROOF OF HIS FRIENDSHIP</td>
+                    <td>BOSS WERE MADE TO BE BROKEN</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/014080336.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000240350_1408.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000240350_SPEAKER1408.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>MARY LIKES YOUR RED SWEATER</td>
+                    <td>NO NO HE WAS TOO GOOD A WORKMAN FOR THAT</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/096220014.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000490102_9622.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000490102_SPEAKER9622.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>JAM LOOKED IN THE KITCHEN</td>
+                    <td>THE ONLY ONE WHO KNOWS WHY IS HIM</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/014200076.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000490175_1420.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000490175_SPEAKER1420.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>LILLY LIVES IN CAIRO NOW</td>
+                    <td>BUT STILL NO IDEA WANT WHAT TO ASK</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/024880190.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000440147_2488.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000440147_SPEAKER2488.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>DORA CAN SEE THE SHEEP</td>
+                    <td>HE WAS STILL AT HOME</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/ref/096120016.WAV" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/unsteered/000490017_9612.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio_ood/steered/000490017_SPEAKER9612.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h1>L2-ARCTIC samples (in-domain evaluation)</h1>
+        <table class="samples-table">
+            <thead>
+                <tr>
+                    <th>Target Text</th>
+                    <th>Reference Text</th>
+                    <th>Reference Speech</th>
+                    <th>Unsteered (Qwen3-TTS Baseline)</th>
+                    <th>Steered (Proposed)</th>
+                </tr>
+            </thead>
+                <tr>
+                    <td>Could the incident have anything to do with Jeanne and Pierre.</td>
+                    <td>There was one difficulty however</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0284_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_b0069_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_b0069_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Could the incident have anything to do with Jeanne and Pierre.</td>
+                    <td>There was one difficulty however</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0284_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_b0069_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_b0069_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Could the incident have anything to do with Jeanne and Pierre.</td>
+                    <td>There was one difficulty however</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0284_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_b0069_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_b0069_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Could the incident have anything to do with Jeanne and Pierre.</td>
+                    <td>There was one difficulty however</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0284_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_b0069_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_b0069_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Then you don't believe in altruism.</td>
+                    <td>It's also an insidious deceitful sun</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0417_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0444_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0444_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Then you don't believe in altruism.</td>
+                    <td>It is also an insidious deceitful sun</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0417_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0444_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0444_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Then you don't believe in altruism.</td>
+                    <td>It is also an insidious deceitful sun</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0417_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0444_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0444_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>Then you don't believe in altruism.</td>
+                    <td>It's also an insidious deceitful sun</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0417_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0444_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0444_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>O'Brien had been a clean living young man with ideals.</td>
+                    <td>May drought destroy your crops</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0532_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0252_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0252_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>O'Brien had been a clean living young man with ideals.</td>
+                    <td>May drought destroy your crops</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0532_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0252_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0252_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>O'Brien had been a clean living young man with ideals.</td>
+                    <td>May drought destroy your crops</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0532_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0252_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0252_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>O'Brien had been a clean living young man with ideals.</td>
+                    <td>May drought destroy your crops</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_a0532_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0252_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0252_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>It was the same way with our revolvers and rifles.</td>
+                    <td>He was manifestly distressed by my coming</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0474_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0227_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0227_LXC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>It was the same way with our revolvers and rifles.</td>
+                    <td>He was manifestly distressed by my coming</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0474_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0227_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0227_NCC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>It was the same way with our revolvers and rifles.</td>
+                    <td>He was manifestly distressed by my coming</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0474_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0227_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0227_TXHC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+                <tr>
+                    <td>It was the same way with our revolvers and rifles.</td>
+                    <td>He was manifestly distressed by my coming</td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/ref/arctic_b0474_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/unsteered/arctic_a0227_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                    <td class="audio-cell"><audio controls><source src="demo_audio/steered/arctic_a0227_BWC.wav" type="audio/wav">Your browser does not support audio.</audio></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+    </div>
 </body>
 </html>
